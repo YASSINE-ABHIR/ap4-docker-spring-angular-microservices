@@ -1,85 +1,89 @@
-# Microservice Architecture with Spring Boot
+# Architecture Microservices avec Spring Boot et Angular
 
-## 🚀 Project Overview
+## 🚀 Présentation du projet
 
-This project implements a **microservice architecture** for a backend system using **Spring Boot**. It consists of multiple services, each with a dedicated responsibility, integrated with Docker and Docker Compose. The frontend is developed with **Angular 19**, creating a complete full-stack application.
+Ce projet met en œuvre une **architecture microservices** pour un backend développé avec **Spring Boot**, intégrée à Docker et Docker Compose. L'application complète est enrichie d'une interface frontend moderne en **Angular 19**.
 
 ---
 
 ## 🏗️ Architecture
 
-### Microservices:
+### Microservices :
 
-1. **Gateway Service**
-   - **Port**: `8888`
-   - Acts as the API gateway for routing requests to appropriate microservices.
-2. **Discovery Service**
+1. **Service Gateway**
 
-   - **Port**: `8761`
-   - Uses **Eureka Discovery Server** to register and discover microservices dynamically.
+   - **Port** : `8888`
+   - Route les requêtes API vers les microservices concernés.
 
-3. **Config Service**
+2. **Service Discovery**
 
-   - **Port**: `9999`
-   - Centralized configuration management using repository:  
+   - **Port** : `8761`
+   - Utilise le serveur **Eureka** pour l'enregistrement et la découverte dynamique des microservices.
+
+3. **Service Config**
+
+   - **Port** : `9999`
+   - Gestion centralisée des configurations via le dépôt :  
      [tp4_config_repo](https://github.com/YASSINE-ABHIR/ap4-docker-spring-angular-microservices-config_repo).
 
-4. **RAG Service**
+4. **Service RAG** (Chatbot)
 
-   - **Port**: `8080`
-   - Handles chatbot processing and PDF loading.
-   - Endpoints:
-     - `/chat` (POST): Processes a chatbot query.
-     - `/load-pdf` (POST): Accepts a PDF file for processing.
+   - **Port** : `8080`
+   - Traitement des requêtes chatbot et chargement de PDF.
+   - Endpoints :
+     - `/chat` (POST) : Traitement des messages du chatbot.
+     - `/load-pdf` (POST) : Chargement et traitement des fichiers PDF.
 
-5. **Crypto Service**
+5. **Service Crypto**
 
-   - **Port**: `8081`
-   - CRUD operations for managing cryptocurrency information.
+   - **Port** : `8081`
+   - Gestion CRUD des données liées aux cryptomonnaies.
 
-6. **Frontend Service**
-   - **Technology**: Angular 19
-   - **Port**: `4200`
-   - Provides a user interface for interacting with the backend system.
+6. **Frontend Angular**
+   - **Technologie** : Angular 19
+   - **Port** : `4200`
+   - Interface utilisateur pour interagir avec les microservices.
 
 ---
 
-## 📸 Screenshots
+## 📸 Captures d'écran
 
-### Landing Page
+### Page d'accueil
 
-![Landing Page](./screenshots/landing-page.png)
+![Page d'accueil](./screenshots/landing-page.png)
 
-### Chatbot Interface
+### Interface Chatbot
 
-![Chatbot Interface](./screenshots/chatbot.png)
+![Interface Chatbot](./screenshots/chatbot.png)
 
-### Upload PDF Interface
+### Chargement PDF
 
-![Upload PDF Interface](./screenshots/uploadpdf.png)
+![Chargement PDF](./screenshots/uploadpdf.png)
 
-### Cryptocurrency Table
+### Tableau des cryptomonnaies
 
-![Cryptocurrency Table](./screenshots/crypto-table.png)
+![Tableau Cryptomonnaies](./screenshots/crypto-table.png)
 
-### Add New Cryptocurrency
+### Ajouter une nouvelle cryptomonnaie
 
-![Add New Cryptocurrency](./screenshots/new-crypto.png)
+![Ajout Cryptomonnaie](./screenshots/new-crypto.png)
 
 ---
 
 ## 📦 Infrastructure
 
-### Docker and Docker Compose
+### Docker et Docker Compose
 
-- Each service includes a dedicated `Dockerfile` for containerization.
-- **Volumes**:
-  - `chatbot_data`: Stores chatbot-related data.
-  - `crypto_data`: Stores cryptocurrency-related data.
-- **Networks**:
-  - `tp4-network`: Ensures isolated communication between services.
+- Chaque microservice possède un `Dockerfile` dédié.
+- **Volumes** :
 
-#### Example Docker Compose Configuration:
+  - `chatbot_data` : Données du chatbot.
+  - `crypto_data` : Données des cryptomonnaies.
+
+- **Réseaux** :
+  - `tp4-network` : Communication isolée entre les services.
+
+#### Exemple de configuration Docker Compose :
 
 ```yaml
 volumes:
@@ -108,9 +112,9 @@ services:
 
 ---
 
-## 🔑 Environment Variables
+## 🔑 Variables d'environnement
 
-The following environment variables are used in `.env`:
+Variables à configurer dans le fichier `.env` :
 
 - `POSTGRES_DB`
 - `POSTGRES_PASSWORD`
@@ -124,104 +128,104 @@ The following environment variables are used in `.env`:
 
 ---
 
-## ⚙️ Setup and Installation
+## ⚙️ Installation et Configuration
 
-### Prerequisites
+### Prérequis
 
-- Docker and Docker Compose
-- Java 17+
-- Node.js and Angular CLI
+- Docker et Docker Compose
+- Java 17 ou supérieur
+- Node.js et Angular CLI
 
-### Steps
+### Étapes
 
-1. Clone the repositories for backend services and the frontend:
+1. Cloner les services backend et frontend depuis GitHub :
+
    ```bash
-   $ git clone https://github.com/YASSINE-ABHIR/ap4-docker-spring-angular-microservices
+   git clone https://github.com/YASSINE-ABHIR/ap4-docker-springBoot-angular-microservices
    ```
-2. Navigate to each service directory and build JAR files:
+
+2. Accéder aux répertoires des services et construire les fichiers JAR :
+
    ```bash
-   $ cd gateway-service
-   $ mvn clean package -DskipTests
+   cd gateway-service
+   mvn clean package -DskipTests
    ```
-3. Set up environment variables in a `.env` file.
-4. Start services with Docker Compose:
+
+3. Définir les variables d'environnement dans un fichier `.env`.
+
+4. Lancer les services avec Docker Compose :
+
    ```bash
-   $ docker-compose up -d --build
+   docker-compose up -d --build
    ```
-5. Access the frontend at `http://localhost`.
+
+5. Accéder au frontend via : `http://localhost`.
 
 ---
 
-## 🛠️ Key Features
+## 🛠️ Fonctionnalités clés
 
-- **Dynamic Service Discovery** with Eureka.
-- **Centralized Configuration Management**.
-- **Chatbot Processing** for natural language queries.
-- **PDF File Upload and Parsing**.
-- **Cryptocurrency Management** with CRUD operations.
-- Full-stack architecture using **Angular 19** and **Spring Boot**.
-- Seamless container orchestration with **Docker Compose**.
-
----
-
-## 🌐 API Endpoints
-
-### Gateway Service: `http://localhost:8888`
-
-- Routes to backend services.
-
-### RAG Service: `http://localhost:8080`
-
-- `/chat`: Process chatbot queries.
-- `/load-pdf`: Accept PDF files.
-
-### Crypto Service: `http://localhost:8081`
-
-- Full CRUD endpoints for cryptocurrency management.
+- **Découverte dynamique des services** avec Eureka.
+- **Gestion centralisée des configurations**.
+- **Chatbot** pour traiter les requêtes en langage naturel.
+- **Chargement et analyse de fichiers PDF**.
+- **Gestion CRUD des cryptomonnaies**.
+- Architecture complète avec **Angular 19** et **Spring Boot**.
+- Orchestration simplifiée avec **Docker Compose**.
 
 ---
 
-## 📄 License
+## 🌐 Endpoints API
 
-This project is licensed under the [MIT License](LICENSE).
+### Gateway Service : `http://localhost:8888`
+
+- Redirection vers les différents services backend.
+
+### Service RAG : `http://localhost:8080`
+
+- `/chat` : Traitement des requêtes chatbot.
+- `/load-pdf` : Chargement de fichiers PDF.
+
+### Service Crypto : `http://localhost:8081`
+
+- Endpoints CRUD complets pour la gestion des cryptomonnaies.
+
+---
+
+## 📄 Licence
+
+Ce projet est sous licence [MIT](LICENSE).
 
 ---
 
 ## 🤝 Contribution
 
-Contributions are welcome! Please follow these steps:
+Les contributions sont les bienvenues ! Voici les étapes à suivre :
 
-1. Fork the repository.
-2. Create a feature branch:
+1. Forker le dépôt.
+2. Créer une branche :
    ```bash
-   git checkout -b feature/your-feature
+   git checkout -b feature/votre-fonctionnalite
    ```
-3. Commit your changes:
+3. Commettre vos modifications :
    ```bash
-   git commit -m "Add your message here"
+   git commit -m "Votre message explicatif"
    ```
-4. Push to the branch:
+4. Pousser la branche :
    ```bash
-   git push origin feature/your-feature
+   git push origin feature/votre-fonctionnalite
    ```
-5. Submit a pull request.
+5. Créer une pull request.
 
 ---
 
-## 🛡️ Security
+## 🛡️ Sécurité
 
-- Ensure to configure sensitive data (API keys, database credentials) in `.env` files.
-- Regularly update dependencies and Docker images for security patches.
-
----
-
-## 🙌 Acknowledgements
-
-Special thanks to all contributors and the open-source community.
+- Veillez à configurer les données sensibles (API keys, identifiants) dans le fichier `.env`.
+- Mettez à jour régulièrement les dépendances et les images Docker pour assurer la sécurité.
 
 ---
 
-```
+## 🙌 Remerciements
 
-Let me know if you need adjustments or additional sections!
-```
+Merci à tous les contributeurs et à la communauté open-source.
