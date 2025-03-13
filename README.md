@@ -141,7 +141,7 @@ Variables à configurer dans le fichier `.env` :
 1. Cloner les services backend et frontend depuis GitHub :
 
    ```bash
-   git clone https://github.com/YASSINE-ABHIR/ap4-docker-springBoot-angular-microservices
+   git clone https://github.com/YASSINE-ABHIR/ap4-docker-spring-angular-microservices
    ```
 
 2. Accéder aux répertoires des services et construire les fichiers JAR :
